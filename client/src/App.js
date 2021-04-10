@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useImperativeHandle, useState} from 'react'
+import {BrowserRouter as Router,Switch,Route,Link,Redirect} from "react-router-dom";
+import Home from './views/Home';
+import Login from './views/Login';
+import Register from './views/Register';
+import {contextObject,AppContext} from './AppContext';
 
 function App() {
+  const [loggedIn,setLoggedIn] = useState(contextObject.isUserLogged)
+  const [token,setToken] = useState(contextObject.jwtToken)
+  const [role,setAccountType] = useState(contextObject.accountType)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AppContext.Provider value={{isUserLogged:loggedIn,toggleLoggedState:setLoggedIn,jwtToken:token,toggleTokenState:setToken,userRole:role,toggleRoleState:setAccountType}}>
+        <Switch>
+          <Route path="/login">
+            <Login/>
+          </Route>
+          <Route path="/register">
+            <Register/>
+          </Route>
+          <Route path="/">
+            <Home/>
+          </Route>
+        </Switch>
+      </AppContext.Provider>
+    </Router>
   );
 }
 
