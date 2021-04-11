@@ -48,7 +48,7 @@ class AuthController extends Controller
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
+            'name' => 'required|string|between:2,100|unique:users',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
         ]);
@@ -64,6 +64,7 @@ class AuthController extends Controller
                 ));
 
         return response()->json([
+            'success' => true,
             'message' => 'User successfully registered',
             'user' => $user
         ], 201);
@@ -78,7 +79,9 @@ class AuthController extends Controller
     public function logout() {
         auth()->logout();
 
-        return response()->json(['message' => 'User successfully signed out']);
+        return response()->json([
+            'success' => true,
+            'message' => 'User successfully signed out']);
     }
 
     /**
@@ -108,6 +111,7 @@ class AuthController extends Controller
      */
     protected function createNewToken($token){
         return response()->json([
+            'success' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
