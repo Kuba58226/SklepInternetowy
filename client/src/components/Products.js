@@ -27,37 +27,54 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function HeroUnit() {
     const classes = useStyles();
+
+    const {Website} = require('../config/website.js');
+
+    const [products,setProducts] = useState([])
+
+    useEffect(()=>{
+      fetch(`${Website.serverName}product/get-random/9`,{method: "GET", headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',},
+      })
+      .then(response => response.json())
+      .then(data => {
+          const products = data.products.map(products=>products)
+          setProducts(products)
+      })
+  },[])
 
     return (
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {cards.map((card) => (
+            {products.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image={card.img}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {card.name}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      {card.short_description}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      View
+                      Zobacz
                     </Button>
-                    <Button size="small" color="primary">
+                    {/* <Button size="small" color="primary">
                       Edit
-                    </Button>
+                    </Button> */}
+                    <Typography size="small" color="primary">
+                      {card.price+'zł'}
+                    </Typography>
                   </CardActions>
                 </Card>
               </Grid>
