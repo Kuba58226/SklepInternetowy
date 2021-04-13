@@ -31,7 +31,7 @@ export default function Navbar() {
         <AppBar position="relative">
             <Toolbar>
             <Typography variant="h6" color="inherit" noWrap style={{ flex: 1 }}>
-                <Link to="/">
+                <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                     Sklep Internetowy
                 </Link>
             </Typography>

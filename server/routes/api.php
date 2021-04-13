@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,18 @@ Route::group([
 ], function ($router) {
     Route::get('/get', [CategoryController::class, 'getAll']);
     Route::get('/get/{id}', [CategoryController::class, 'getSingle']);
+});
+
+Route::group([
+    'middleware' => 'is.admin',
+    'prefix' => 'product'
+], function ($router) {
+    Route::post('/create', [ProductController::class, 'create']);
+});
+
+Route::group([
+    'prefix' => 'product'
+], function ($router) {
+    Route::get('/get-random/{number}', [ProductController::class, 'getRandom']);
+    Route::get('/get-by-category/{categoryId}', [ProductController::class, 'getByCategory']);
 });

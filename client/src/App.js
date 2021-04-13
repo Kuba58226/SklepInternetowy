@@ -3,6 +3,7 @@ import {BrowserRouter as Router,Switch,Route,Link,Redirect} from "react-router-d
 import Home from './views/Home';
 import Login from './views/Login';
 import Register from './views/Register';
+import Category from './views/Category';
 import {contextObject,AppContext} from './AppContext';
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/register">
             <Register/>
+          </Route>
+          <Route path="/category/:categoryId/:page">
+            <Category/>
           </Route>
           <Route path="/">
             <Home/>
