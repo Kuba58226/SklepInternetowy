@@ -58,6 +58,8 @@ Route::group([
 Route::group([
     'prefix' => 'product'
 ], function ($router) {
+    Route::get('/get', [ProductController::class, 'getAll']);
+    Route::get('/get/{id}', [ProductController::class, 'getSingle']);
     Route::get('/get-random/{number}', [ProductController::class, 'getRandom']);
     Route::get('/get-by-category/{categoryId}', [ProductController::class, 'getByCategory']);
 });

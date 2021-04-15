@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -156,7 +157,7 @@ export default function Category() {
         <main className={classes.content}>
         <div className={classes.appBarSpacer}/>
             <Container maxWidth="md" className={classes.cardGrid}>
-            <Typography variant="h2" component="h3">
+            <Typography align='center' variant="h2" component="h3">
                 {category.name}
             </Typography>
             <Grid container spacing={4}>
@@ -169,20 +170,19 @@ export default function Category() {
                         title="Image title"
                       />
                       <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {card.name}
-                        </Typography>
+                      <Link to={`/product/${card.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                          <Typography gutterBottom variant="h5" component="h2">
+                              {card.name}
+                          </Typography>
+                        </Link>
                         <Typography>
                           {card.short_description}
                         </Typography>
                       </CardContent>
                       <CardActions>
                         <Button size="small" color="primary">
-                          Zobacz
+                          <ShoppingCartIcon/>
                         </Button>
-                        {/* <Button size="small" color="primary">
-                          Edit
-                        </Button> */}
                         <Typography size="small" color="primary">
                           {card.price+"zł"}
                         </Typography>
@@ -193,14 +193,20 @@ export default function Category() {
                 </Grid>
             </Container>
 
+            <Box 
+              display="flex" 
+              alignItems="center"
+              justifyContent="center"
+              width='100%'
+              >
             <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
               {Array.from({length: pages}, (_, i) => i + 1).map((button)=>(
-                // <Link to={"/category?categoryId="+query.get("categoryId")+"?page="+button} replace>
                 <Link to={`/category/${params.categoryId}/${button}`}>
                   <Button>{button}</Button>
                 </Link>
               ))}
             </ButtonGroup>
+            </Box>
 
         </main>
         </Box>
