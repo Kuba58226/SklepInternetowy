@@ -35,6 +35,10 @@ export default function Navbar() {
                     Sklep Internetowy
                 </Link>
             </Typography>
+            {userRole==='admin' &&
+                <div>
+                    <Link to="/admin-panel"><Button variant="contained" color="primary">Panel Administracyjny</Button></Link>
+                </div>}
             {!isUserLogged?
                 <div>
                     <Link to="/login"><Button variant="contained" color="primary">Zaloguj się</Button></Link>

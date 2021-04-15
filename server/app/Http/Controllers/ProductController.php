@@ -9,6 +9,26 @@ use Validator;
 
 class ProductController extends Controller
 {
+    public function getAll(Request $request)
+    {
+        $products = Product::all();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Products successfully returned',
+            'products' => $products
+        ], 201);
+    }
+    public function getSingle(Request $request)
+    {
+        $product = Product::findOrFail($request->id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product successfully returned',
+            'product' => $product
+        ], 201);
+    }
     public function getRandom(Request $request)
     {
         $products = Product::inRandomOrder()->limit($request->number)->get();

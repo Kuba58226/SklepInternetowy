@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useImperativeHandle, useState} from 'react'
+import {BrowserRouter as Router,Switch,Route,Link,Redirect} from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -58,20 +60,19 @@ export default function HeroUnit() {
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {card.name}
-                    </Typography>
+                  <Link to={`/product/${card.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {card.name}
+                      </Typography>
+                    </Link>
                     <Typography>
                       {card.short_description}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
-                      Zobacz
+                      <ShoppingCartIcon/>
                     </Button>
-                    {/* <Button size="small" color="primary">
-                      Edit
-                    </Button> */}
                     <Typography size="small" color="primary">
                       {card.price+'zł'}
                     </Typography>
