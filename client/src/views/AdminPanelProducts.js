@@ -145,11 +145,11 @@ export default function AdminPanelProducts() {
       Accept: 'application/json',
       'Content-Type': 'application/json',},
     body: JSON.stringify({name: productName,
-                        category_id: category,
-                        price: price,
-                        img: img,
-                        description: description,
-                        short_description: short_description})})
+      category_id: category,
+      price: price,
+      img: img,
+      description: description,
+      short_description: short_description})})
     .then(response => response.json())
     .then(data => {
       if (data.success===true){

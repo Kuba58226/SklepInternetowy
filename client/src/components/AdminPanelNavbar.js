@@ -14,6 +14,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {AppContext} from '../AppContext';
+import Badge from '@material-ui/core/Badge';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {BrowserRouter as Router,Switch,Route,Link,Redirect} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -125,6 +128,13 @@ export default function AdminPanel() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Panel Administracyjny
           </Typography>
+          <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+            <IconButton color="inherit">
+              <Badge color="secondary">
+                <ExitToAppIcon />
+              </Badge>
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
