@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {useDispatchCart} from './Cart';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -35,6 +36,12 @@ export default function HeroUnit() {
     const {Website} = require('../config/website.js');
 
     const [products,setProducts] = useState([])
+
+    const dispatch = useDispatchCart();
+
+    function addToCart(product) {
+      dispatch({type: "ADD", item: product})
+    }
 
     useEffect(()=>{
       fetch(`${Website.serverName}product/get-random/9`,{method: "GET", headers: {
@@ -70,7 +77,7 @@ export default function HeroUnit() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button onClick={() => addToCart(card)} size="small" color="primary">
                       <ShoppingCartIcon/>
                     </Button>
                     <Typography size="small" color="primary">

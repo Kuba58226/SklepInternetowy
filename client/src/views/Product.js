@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import {useDispatchCart} from './../components/Cart';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -39,6 +40,12 @@ export default function Category() {
     let params = useParams();
 
     const [product,setProduct] = useState([])
+
+    const dispatch = useDispatchCart();
+
+    function addToCart(product) {
+      dispatch({type: "ADD", item: product})
+    }
 
     useEffect(()=>{
         fetch(`${Website.serverName}product/get/${params.productId}`,{method: "GET", headers: {
@@ -74,7 +81,7 @@ export default function Category() {
                     <Typography color="primary">
                       {product.price+'zł'}
                     </Typography>
-                    <Button variant="contained" color="primary">
+                    <Button onClick={() => addToCart(product)} variant="contained" color="primary">
                         Dodaj do koszyka
                     </Button>
                   </CardContent>

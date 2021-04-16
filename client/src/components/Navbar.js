@@ -5,8 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import {AppContext} from '../AppContext';
+import {useCart} from './Cart';
 
 export default function Navbar() {
+    const cart = useCart();
     const {Website} = require('../config/website.js');
 
     const {isUserLogged,toggleLoggedState,jwtToken,toggleTokenState,userRole,toggleRoleState} = useContext(AppContext)
@@ -35,6 +37,9 @@ export default function Navbar() {
                     Sklep Internetowy
                 </Link>
             </Typography>
+            <div>
+                <Link to="/cart"><Button variant="contained" color="primary">Koszyk ({cart.length})</Button></Link>
+            </div>
             {userRole==='admin' &&
                 <div>
                     <Link to="/admin-panel"><Button variant="contained" color="primary">Panel Administracyjny</Button></Link>
