@@ -12,8 +12,13 @@ Wykorzystane technologie:
 - React.JS
 - MySQL
 
+Strona główna sklepu
 ![Strona główna sklepu](https://i.imgur.com/l48xRS5.png)
+Widok produktów pogrupowanych według kategorii
 ![Widok produktów pogrupowanych według kategorii](https://i.imgur.com/OzhRyGH.png)
+Widok logowania
 ![Widok logowania](https://i.imgur.com/NE5ghtu.png)
+Widok panelu administracyjnego
 ![Widok panelu administracyjnego](https://i.imgur.com/liTmOxl.png)
+Widok koszyka z produktami
 ![Widok koszyka z produktami](https://i.imgur.com/4kN2EdX.png)
