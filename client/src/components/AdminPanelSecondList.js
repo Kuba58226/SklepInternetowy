@@ -19,19 +19,13 @@ export default function AdminPanelFirstList() {
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Current month" />
+        <ListItemText primary="Nowe" />
       </ListItem>
       <ListItem button>
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Last quarter" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <AssignmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="Year-end sale" />
+        <ListItemText primary="Zrealizowane" />
       </ListItem>
     </div>
   );

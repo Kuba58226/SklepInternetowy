@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
+import {BrowserRouter as Router,Switch,Route,Link,Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
         margin: 10,
     },
     products: {
-        // width: 'auto',
-        // height: '300px',
         margin: 30
     },
     details: {
@@ -116,9 +115,11 @@ export default function CartView() {
                         <Typography variant="h6">
                             Koszt dostawy: Gratis
                         </Typography>
-                        <Button className={classes.checkoutButton} variant="contained" color="primary">
-                          Potwierdź zamówienie
-                        </Button>
+                        <Link to="/checkout" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                            <Button className={classes.checkoutButton} variant="contained" color="primary">
+                            Potwierdź zamówienie
+                            </Button>
+                        </Link>
                     </Grid>
                 </Paper>
             </Grid>
