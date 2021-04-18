@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import {BrowserRouter as Router,Switch,Route,Link,Redirect} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -184,6 +185,7 @@ export default function AdminPanelProducts() {
   },[])
 
   return (
+    userRole==='admin'?
     <div className={classes.root}>
       <AdminPanelNavbar/>
       <main className={classes.content}>
@@ -275,5 +277,6 @@ export default function AdminPanelProducts() {
         </Container>
       </main>
     </div>
+    :<Redirect to="/"/>
   );
 }

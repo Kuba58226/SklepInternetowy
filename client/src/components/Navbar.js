@@ -38,15 +38,15 @@ export default function Navbar() {
                 </Link>
             </Typography>
             <div>
-                <Link to="/cart"><Button variant="contained" color="primary">Koszyk ({cart.length})</Button></Link>
+                <Link to="/cart" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="primary">Koszyk ({cart.length})</Button></Link>
             </div>
             {userRole==='admin' &&
                 <div>
-                    <Link to="/admin-panel"><Button variant="contained" color="primary">Panel Administracyjny</Button></Link>
+                    <Link to="/admin-panel" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="primary">Panel Administracyjny</Button></Link>
                 </div>}
             {!isUserLogged?
                 <div>
-                    <Link to="/login"><Button variant="contained" color="primary">Zaloguj się</Button></Link>
+                    <Link to="/login" style={{ color: 'inherit', textDecoration: 'inherit'}}><Button variant="contained" color="primary">Zaloguj się</Button></Link>
                 </div>
                 :
                 <div>

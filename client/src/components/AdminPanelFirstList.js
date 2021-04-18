@@ -14,6 +14,7 @@ import LayersIcon from '@material-ui/icons/Layers';
 export default function AdminPanelFirstList() {
   return (
     <div>
+      <ListSubheader inset>Zarządzanie</ListSubheader>
       <Link to='/admin-panel-categories' style={{ color: 'inherit', textDecoration: 'inherit'}}>
         <ListItem button>
           <ListItemIcon>
