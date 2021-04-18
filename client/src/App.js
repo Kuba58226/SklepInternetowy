@@ -9,6 +9,7 @@ import AdminPanel from './views/AdminPanel';
 import AdminPanelCategories from './views/AdminPanelCategories';
 import AdminPanelProducts from './views/AdminPanelProducts';
 import CartView from './views/CartView';
+import Checkout from './views/Checkout';
 import {contextObject,AppContext} from './AppContext';
 import {CartProvider} from './components/Cart';
 
@@ -28,7 +29,7 @@ function App() {
             <Route path="/register">
               <Register/>
             </Route>
-            <Route path="/category/:categoryId/:page">
+            <Route path="/category/:categoryId/:page/:minPrice/:maxPrice">
               <Category/>
             </Route>
             <Route path="/product/:productId">
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/cart">
               <CartView/>
+            </Route>
+            <Route path="/checkout">
+              <Checkout/>
             </Route>
             <Route path="/">
               <Home/>

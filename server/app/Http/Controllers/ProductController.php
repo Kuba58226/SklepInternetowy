@@ -41,7 +41,7 @@ class ProductController extends Controller
     }
     public function getByCategory(Request $request)
     {
-        $products = Product::where('category_id', $request->categoryId)->paginate(9);
+        $products = Product::where('category_id', $request->categoryId)->whereBetween('price',[$request->minPrice,$request->maxPrice])->paginate(9);
 
         return response()->json([
             'success' => true,

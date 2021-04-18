@@ -12,7 +12,7 @@ const reducer = (state,action) => {
                     return state;
                 }
             }
-            return [...state,{id: action.item.id, name: action.item.name, count: 1, price: action.item.price}]
+            return [...state,{id: action.item.id, name: action.item.name, count: 1, price: action.item.price, img: action.item.img}]
         case "REMOVE":
             const newArr = [...state];
             newArr.splice(action.index, 1);
