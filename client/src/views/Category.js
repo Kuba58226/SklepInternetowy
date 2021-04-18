@@ -9,9 +9,6 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -22,6 +19,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Slider from '@material-ui/core/Slider';
 import {useDispatchCart} from './../components/Cart';
 
 import Box from '@material-ui/core/Box';
@@ -65,10 +63,18 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: 'flex',
   },
+  slider: {
+    width: '95%',
+  },
 }));
+
+function valuetext(value) {
+  return `${value}°C`;
+}
 
 export default function Category() {
     const classes = useStyles();
+    let history = useHistory();
     const [open, setOpen] = React.useState(true);
 
     let params = useParams();
@@ -85,6 +91,20 @@ export default function Category() {
       dispatch({type: "ADD", item: product})
     }
 
+    const [price, setPrice] = React.useState([params.minPrice, params.maxPrice]);
+
+    const handlePriceChange = (event, newValue) => {
+      setPrice(newValue);
+    };
+
+    const filter = () => {
+      history.push(`/category/${params.categoryId}/${params.page}/${price[0]}/${price[1]}`);
+    };
+
+    useEffect(()=>{
+      setPrice([params.minPrice, params.maxPrice])
+    },[params.categoryId,params.page,params.minPrice,params.maxPrice])
+
     useEffect(()=>{
           fetch(`${Website.serverName}category/get/${params.categoryId}`,{method: "GET", headers: {
             Accept: 'application/json',
@@ -94,10 +114,10 @@ export default function Category() {
         .then(data => {
             setCategory(data.category)
         })
-    },[params.categoryId,params.page])
+    },[params.categoryId,params.page,params.minPrice,params.maxPrice])
 
     useEffect(()=>{
-          fetch(`${Website.serverName}product/get-by-category/${params.categoryId}?page=${params.page}`,{method: "GET", headers: {
+          fetch(`${Website.serverName}product/get-by-category/${params.categoryId}/${params.minPrice}/${params.maxPrice}?page=${params.page}`,{method: "GET", headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',},
         })
@@ -108,7 +128,7 @@ export default function Category() {
             setProducts(products)
             setPages(data.products.last_page)
         })
-    },[params.categoryId,params.page])
+    },[params.categoryId,params.page,params.minPrice,params.maxPrice])
 
     return (
       <React.Fragment>
@@ -124,39 +144,35 @@ export default function Category() {
         open={open}
         >
             <List>
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Filtry" />
+            <ListItem>
+              <Typography id="range-slider" gutterBottom>
+                Cena
+              </Typography>
             </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Filtry" />
+            <ListItem>
+              <Slider className={classes.slider}
+                value={price}
+                onChange={handlePriceChange}
+                max = {15000}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                getAriaValueText={valuetext}
+              />
             </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Filtry" />
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Filtry" />
+            <ListItem>
+              <Button onClick={filter} variant="contained" color="primary">
+                Filtruj
+              </Button>
             </ListItem>
             </List>
         </Drawer>
 
         <Box 
-              display="flex" 
-              alignItems="center"
-              justifyContent="center"
-              width='100%'
-              >
+          display="flex" 
+          alignItems="center"
+          justifyContent="center"
+          width='100%'
+        >
         <main className={classes.content}>
         <div className={classes.appBarSpacer}/>
             <Container maxWidth="md" className={classes.cardGrid}>
@@ -201,10 +217,10 @@ export default function Category() {
               alignItems="center"
               justifyContent="center"
               width='100%'
-              >
+            >
             <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
               {Array.from({length: pages}, (_, i) => i + 1).map((button)=>(
-                <Link to={`/category/${params.categoryId}/${button}`}>
+                <Link to={`/category/${params.categoryId}/${button}/${params.minPrice}/${params.maxPrice}`}>
                   <Button>{button}</Button>
                 </Link>
               ))}

@@ -37,7 +37,7 @@ export default function Header(props) {
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {categories.map((section) => (
             <Link
-                to={"/category/"+section.id+"/1"}
+                to={"/category/"+section.id+"/1/0/15000"}
                 color="primary"
                 noWrap
                 variant="body2"
