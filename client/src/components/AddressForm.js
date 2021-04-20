@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useImperativeHandle, useState} from 'react'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -6,6 +6,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import {useCart} from './Cart';
+import {AppContext} from '../AppContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,6 +20,72 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddressForm() {
   const classes = useStyles();
+  const cart = useCart();
+  const {Website} = require('../config/website.js');
+  const {isUserLogged,toggleLoggedState,jwtToken,toggleTokenState,userRole,toggleRoleState} = useContext(AppContext)
+
+  const [firstName,setFirstName] = useState("");
+  const [lastName,setLastName] = useState("");
+  const [address1,setAddress1] = useState("");
+  const [address2,setAddress2] = useState("");
+  const [city,setCity] = useState("");
+  const [state,setState] = useState("");
+  const [postalCode,setPostalCode] = useState("");
+  const [country,setCountry] = useState("");
+
+  function handleOnChangeFirstName(e){
+    setFirstName(e.target.value)
+  }
+
+  function handleOnChangeLastName(e){
+    setLastName(e.target.value)
+  }
+
+  function handleOnChangeAddress1(e){
+    setAddress1(e.target.value)
+  }
+
+  function handleOnChangeAddress2(e){
+    setAddress2(e.target.value)
+  }
+
+  function handleOnChangeCity(e){
+    setCity(e.target.value)
+  }
+
+  function handleOnChangeState(e){
+    setState(e.target.value)
+  }
+
+  function handleOnChangePostalCode(e){
+    setPostalCode(e.target.value)
+  }
+
+  function handleOnChangeCountry(e){
+    setCountry(e.target.value)
+  }
+
+  function submitOrder(){
+    fetch(`${Website.serverName}order/create`,{method: "POST", headers: {
+      'Authorization': 'Bearer '+jwtToken,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',},
+    body: JSON.stringify({
+      cart: cart,
+      firstName: firstName,
+      lastName: lastName,
+      address1: address1,
+      address2: address2,
+      city: city,
+      state: state,
+      postalCode: postalCode,
+      country: country,
+    })})
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+    })
+  }
 
   return (
     <Box className={classes.root}>
@@ -26,7 +94,7 @@ export default function AddressForm() {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <TextField onChange={handleOnChangeFirstName}
             required
             id="firstName"
             name="firstName"
@@ -36,17 +104,17 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <TextField onChange={handleOnChangeLastName}
             required
             id="lastName"
             name="lastName"
-            label="Last name"
+            label="Nazwisko"
             fullWidth
             autoComplete="family-name"
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <TextField onChange={handleOnChangeAddress1}
             required
             id="address1"
             name="address1"
@@ -56,7 +124,7 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <TextField onChange={handleOnChangeAddress2}
             id="address2"
             name="address2"
             label="Adres"
@@ -65,7 +133,7 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <TextField onChange={handleOnChangeCity}
             required
             id="city"
             name="city"
@@ -75,10 +143,10 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
+          <TextField onChange={handleOnChangeState} id="state" name="state" label="Województwo" fullWidth />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <TextField onChange={handleOnChangePostalCode}
             required
             id="zip"
             name="zip"
@@ -88,7 +156,7 @@ export default function AddressForm() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <TextField onChange={handleOnChangeCountry}
             required
             id="country"
             name="country"
@@ -97,7 +165,7 @@ export default function AddressForm() {
             autoComplete="shipping country"
           />
         </Grid>
-        <Button className={classes.button} variant="contained" color="primary">
+        <Button onClick={submitOrder} className={classes.button} variant="contained" color="primary">
             Potwierdź zamówienie
         </Button>
       </Grid>
