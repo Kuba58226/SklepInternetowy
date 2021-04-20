@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +63,11 @@ Route::group([
     Route::get('/get/{id}', [ProductController::class, 'getSingle']);
     Route::get('/get-random/{number}', [ProductController::class, 'getRandom']);
     Route::get('/get-by-category/{categoryId}/{minPrice}/{maxPrice}', [ProductController::class, 'getByCategory']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'order'
+], function ($router) {
+    Route::post('/create', [OrderController::class, 'create']);
 });
