@@ -6,6 +6,7 @@ Zaimplementowane funkcjonalności systemu:
 - Panel administracyjny pozwalający na dodawanie kategorii oraz produktów
 - Koszyk pozwalający użytkownikowi systemu na zakup wielu produktów
 - Wyświetlanie produktów pogrupowanych według kategorii, podzielonych na stronie za pomocą paginacji, z możliwością filtrowania ofert po cenie wybranej przez użytkownika
+- Składanie zamówień dostępne dla zalogowanych użytkowników systemu
 
 Wykorzystane technologie:
 - Laravel
@@ -13,12 +14,12 @@ Wykorzystane technologie:
 - MySQL
 
 Strona główna sklepu
-![Strona główna sklepu](https://i.imgur.com/l48xRS5.png)
+![Strona główna sklepu](https://i.imgur.com/WnK9Q8v.png)
 Widok produktów pogrupowanych według kategorii
-![Widok produktów pogrupowanych według kategorii](https://i.imgur.com/OzhRyGH.png)
+![Widok produktów pogrupowanych według kategorii](https://i.imgur.com/6DMAAXm.png)
 Widok logowania
-![Widok logowania](https://i.imgur.com/NE5ghtu.png)
+![Widok logowania](https://i.imgur.com/KfysGWv.png)
 Widok panelu administracyjnego
-![Widok panelu administracyjnego](https://i.imgur.com/liTmOxl.png)
+![Widok panelu administracyjnego](https://i.imgur.com/vLAtIBR.png)
 Widok koszyka z produktami
-![Widok koszyka z produktami](https://i.imgur.com/4kN2EdX.png)
+![Widok koszyka z produktami](https://i.imgur.com/RijDqcp.png)
